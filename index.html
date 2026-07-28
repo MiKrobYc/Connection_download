@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Мессенджер</title>
+    <title>Connection - Мессенджер</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -13,17 +13,38 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            margin-top: 50px;
+            margin: 50px auto;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        /* Стили для иконки приложения */
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
         }
         .download-btn {
             display: inline-block;
@@ -35,65 +56,95 @@
             font-weight: bold;
             font-size: 1.2em;
             margin: 20px 0;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .download-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         .warning {
-            background: rgba(255, 193, 7, 0.2);
+            background: rgba(255, 193, 7, 0.15);
             border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: left;
         }
+        /* Сетка для возможностей (адаптивная) */
         .features {
-            margin-top: 30px;
+            margin-top: 40px;
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
         }
         .feature {
-            margin: 15px 0;
-            padding-left: 30px;
+            padding: 15px 15px 15px 45px;
             position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
         .feature:before {
             content: "✓";
             position: absolute;
-            left: 0;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             font-weight: bold;
+            color: #4ade80; /* Ярко-зеленая галочка */
+            font-size: 1.2em;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .container { padding: 25px; margin: 20px auto; }
+            .features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Мой Мессенджер</h1>
-        <p>Быстрый, безопасный и удобный мессенджер для общения</p>
+        <!-- ИКОНКА ПРИЛОЖЕНИЯ -->
+        <!-- Замените 'icon.png' на точное имя файла вашей иконки -->
+        <!-- onerror скрывает картинку, если вы еще не загрузили файл, чтобы не было "битой" иконки -->
+        <img src="icon.png" alt="Иконка Connection" class="app-icon" onerror="this.style.display='none'">
         
-        <a href="https://github.com/ваш-username/my-messenger-site/releases/download/v1.0.0/app-release.apk" class="download-btn">
-            📥 Скачать APK (15 MB)
+        <h1>🚀 Connection</h1>
+        <p class="subtitle">Быстрый, безопасный и удобный мессенджер для повседневного общения</p>
+        
+        <a href="https://github.com/MiKrobYc/Connection_download/releases/download/v1.0.0/app-release.apk" class="download-btn">
+            📥 Скачать APK (бесплатно)
         </a>
         
         <div class="warning">
             <strong>⚠️ Важная информация об установке:</strong><br>
-            Поскольку приложение распространяется вне Google Play, Android покажет предупреждение о "неизвестных источниках". 
-            Это нормальная реакция системы. Наше приложение проверено на вирусы и безопасно.
+            Поскольку приложение распространяется напрямую, а не через Google Play, Android покажет стандартное предупреждение о "неизвестных источниках". 
+            Это нормальная реакция системы на любое приложение вне магазина. Мы гарантируем безопасность: приложение имеет цифровую подпись и не содержит вредоносного кода.
             <br><br>
-            <strong>Инструкция:</strong>
-            <ol>
-                <li>Нажмите "Скачать" выше</li>
-                <li>Если браузер спросит разрешение - нажмите "Скачать все равно"</li>
-                <li>Откройте скачанный файл</li>
-                <li>Нажмите "Настройки" → "Разрешить установку из этого источника"</li>
-                <li>Нажмите "Установить"</li>
+            <strong>Простая инструкция:</strong>
+            <ol style="margin-top: 10px; padding-left: 20px;">
+                <li>Нажмите кнопку "Скачать" выше.</li>
+                <li>Если браузер спросит разрешение, нажмите "Скачать все равно".</li>
+                <li>Откройте скачанный файл (обычно в папке "Загрузки").</li>
+                <li>Нажмите "Настройки" → включите переключатель "Разрешить установку из этого источника".</li>
+                <li>Нажмите "Установить" и пользуйтесь!</li>
             </ol>
         </div>
         
         <div class="features">
-            <h2>Возможности:</h2>
-            <div class="feature">Мгновенная доставка сообщений</div>
-            <div class="feature">Шифрование переписки</div>
-            <div class="feature">Групповые чаты</div>
-            <div class="feature">Отправка фото и файлов</div>
-            <div class="feature">Автоматические обновления</div>
+            <h2 style="grid-column: 1 / -1; text-align: center; margin-bottom: 10px;">Возможности приложения:</h2>
+            <div class="feature">Мгновенная доставка сообщений без задержек</div>
+            <div class="feature">Отправка фото, видео и файлов любого формата</div>
+            <div class="feature">Создание групповых чатов для друзей и коллег</div>
+            <div class="feature">Push-уведомления о новых сообщениях в реальном времени</div>
+            <div class="feature">Минималистичный и интуитивно понятный интерфейс</div>
+            <div class="feature">Регулярные автоматические обновления внутри приложения</div>
+            <div class="feature">Полное отсутствие навязчивой рекламы и трекеров</div>
+            <div class="feature">Оптимизированный расход заряда батареи и трафика</div>
         </div>
     </div>
 </body>
