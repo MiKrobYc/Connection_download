@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Мессенджер</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .features {
+            margin-top: 30px;
+        }
+        .feature {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .feature:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Мой Мессенджер</h1>
+        <p>Быстрый, безопасный и удобный мессенджер для общения</p>
+        
+        <a href="https://github.com/ваш-username/my-messenger-site/releases/download/v1.0.0/app-release.apk" class="download-btn">
+            📥 Скачать APK (15 MB)
+        </a>
+        
+        <div class="warning">
+            <strong>⚠️ Важная информация об установке:</strong><br>
+            Поскольку приложение распространяется вне Google Play, Android покажет предупреждение о "неизвестных источниках". 
+            Это нормальная реакция системы. Наше приложение проверено на вирусы и безопасно.
+            <br><br>
+            <strong>Инструкция:</strong>
+            <ol>
+                <li>Нажмите "Скачать" выше</li>
+                <li>Если браузер спросит разрешение - нажмите "Скачать все равно"</li>
+                <li>Откройте скачанный файл</li>
+                <li>Нажмите "Настройки" → "Разрешить установку из этого источника"</li>
+                <li>Нажмите "Установить"</li>
+            </ol>
+        </div>
+        
+        <div class="features">
+            <h2>Возможности:</h2>
+            <div class="feature">Мгновенная доставка сообщений</div>
+            <div class="feature">Шифрование переписки</div>
+            <div class="feature">Групповые чаты</div>
+            <div class="feature">Отправка фото и файлов</div>
+            <div class="feature">Автоматические обновления</div>
+        </div>
+    </div>
+</body>
+</html>
