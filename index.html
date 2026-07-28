@@ -33,15 +33,8 @@
             pointer-events: none;
         }
         
-        .bg-decoration-1 {
-            top: -150px;
-            left: -150px;
-        }
-        
-        .bg-decoration-2 {
-            bottom: -150px;
-            right: -150px;
-        }
+        .bg-decoration-1 { top: -150px; left: -150px; }
+        .bg-decoration-2 { bottom: -150px; right: -150px; }
         
         .container {
             max-width: 600px;
@@ -110,10 +103,11 @@
         .download-section {
             margin: 30px 0;
             padding: 0 10px;
+            text-align: center; /* Гарантированное центрирование */
         }
         
         .download-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
             background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
@@ -127,7 +121,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 350px;
-            margin: 0 auto; /* Добавлено: центрирование через auto */
             justify-content: center;
             position: relative;
             overflow: hidden;
@@ -144,18 +137,14 @@
             transition: left 0.5s;
         }
         
-        .download-btn:hover:before {
-            left: 100%;
-        }
+        .download-btn:hover:before { left: 100%; }
         
         .download-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
-        .download-btn:active {
-            transform: translateY(-1px);
-        }
+        .download-btn:active { transform: translateY(-1px); }
         
         .file-info {
             display: flex;
@@ -164,12 +153,51 @@
             margin-top: 15px;
             font-size: 0.9em;
             opacity: 0.9;
+            flex-wrap: wrap;
         }
         
         .file-info span {
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+        
+        /* Блок для ПК и iOS */
+        .desktop-message {
+            display: none; /* Скрыто по умолчанию, показывается через JS */
+            text-align: center;
+            padding: 20px 0;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .qr-container img {
+            width: 200px;
+            height: 200px;
+            display: block;
+        }
+        
+        .link-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            word-break: break-all;
+            font-size: 0.95em;
+        }
+        
+        .link-box a {
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: bold;
         }
         
         /* Блок предупреждения */
@@ -225,9 +253,7 @@
             font-size: 0.95em;
         }
         
-        .instruction li:last-child {
-            margin-bottom: 0;
-        }
+        .instruction li:last-child { margin-bottom: 0; }
         
         .instruction li:before {
             content: counter(instruction-counter);
@@ -327,59 +353,34 @@
         
         /* Адаптация для планшетов */
         @media (min-width: 600px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .feature {
-                padding: 20px;
-            }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature { padding: 20px; }
         }
         
         /* Адаптация для больших экранов */
         @media (min-width: 768px) {
-            .container {
-                padding: 30px;
-            }
-            
-            h1 {
-                font-size: 3em;
-            }
-            
-            .subtitle {
-                font-size: 1.2em;
-            }
-            
-            .download-btn {
-                font-size: 1.2em;
-                padding: 20px 50px;
-            }
+            .container { padding: 30px; }
+            h1 { font-size: 3em; }
+            .subtitle { font-size: 1.2em; }
+            .download-btn { font-size: 1.2em; padding: 20px 50px; }
         }
         
         /* Анимации */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .header, .download-section, .warning, .features {
+        .header, .download-section, .desktop-message, .warning, .features {
             animation: fadeIn 0.6s ease-out;
         }
         
         .download-section { animation-delay: 0.1s; }
+        .desktop-message { animation-delay: 0.1s; }
         .warning { animation-delay: 0.2s; }
         .features { animation-delay: 0.3s; }
         
-        /* Убираем задержку нажатия на мобильных */
-        a, button {
-            touch-action: manipulation;
-        }
+        a, button { touch-action: manipulation; }
     </style>
 </head>
 <body>
@@ -397,8 +398,8 @@
             <p class="subtitle">Быстрый, безопасный и удобный мессенджер для повседневного общения</p>
         </div>
         
-        <!-- Кнопка скачивания -->
-        <div class="download-section">
+        <!-- Кнопка скачивания (ТОЛЬКО ДЛЯ ANDROID) -->
+        <div class="download-section" id="downloadSection">
             <a href="https://github.com/MiKrobYc/Connection_download/releases/download/v1.0.0/app-release.apk" class="download-btn">
                 <span>📥</span>
                 <span>Скачать APK</span>
@@ -407,6 +408,28 @@
                 <span>📦 Версия 1.0.0</span>
                 <span>💾 ~15 MB</span>
                 <span>🔒 Безопасно</span>
+            </div>
+        </div>
+        
+        <!-- Сообщение для ПК и iOS (С QR-кодом) -->
+        <div class="desktop-message" id="desktopMessage">
+            <div class="warning" style="text-align: center;">
+                <div style="font-size: 3.5em; margin-bottom: 15px;">🖥️ ➡️ 📱</div>
+                <h2 style="margin-bottom: 15px; font-size: 1.5em;">Скачайте на свой телефон</h2>
+                <p style="margin-bottom: 25px; font-size: 1.05em; line-height: 1.6;">
+                    Мессенджер <strong>Connection</strong> доступен только для устройств на Android.<br>
+                    Откройте эту страницу на телефоне или отсканируйте QR-код камерой:
+                </p>
+                
+                <div class="qr-container">
+                    <!-- QR-код генерируется автоматически для вашего сайта -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mikrobyc.github.io/Connection_download/" alt="QR-код для скачивания">
+                </div>
+                
+                <div class="link-box">
+                    Или отправьте ссылку себе на телефон:<br>
+                    <a href="https://mikrobyc.github.io/Connection_download/">mikrobyc.github.io/Connection_download/</a>
+                </div>
             </div>
         </div>
         
@@ -420,7 +443,7 @@
                 Поскольку приложение распространяется напрямую, Android покажет предупреждение о "неизвестных источниках". Это стандартная защита системы. Наше приложение проверено и безопасно.
             </div>
             <div class="instruction">
-                <div class="instruction-title"> Как установить:</div>
+                <div class="instruction-title">Как установить:</div>
                 <ol>
                     <li>Нажмите кнопку "Скачать APK" выше</li>
                     <li>Если браузер спросит — нажмите "Скачать все равно"</li>
@@ -481,6 +504,25 @@
     </div>
     
     <script>
+        // Определение устройства и управление видимостью блоков
+        document.addEventListener('DOMContentLoaded', function() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            
+            const downloadSection = document.getElementById('downloadSection');
+            const desktopMessage = document.getElementById('desktopMessage');
+            
+            if (isAndroid) {
+                // Пользователь на Android: показываем кнопку, скрываем сообщение для ПК
+                if (downloadSection) downloadSection.style.display = 'block';
+                if (desktopMessage) desktopMessage.style.display = 'none';
+            } else {
+                // Пользователь на iOS или ПК: показываем QR-код, скрываем кнопку скачивания
+                if (downloadSection) downloadSection.style.display = 'none';
+                if (desktopMessage) desktopMessage.style.display = 'block';
+            }
+        });
+        
         // Плавная прокрутка для якорных ссылок
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -490,12 +532,6 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        });
-        
-        // Отслеживание нажатия на кнопку скачивания
-        document.querySelector('.download-btn').addEventListener('click', function() {
-            // Можно добавить аналитику здесь
-            console.log('Download started');
         });
     </script>
 </body>
